@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/v1/:path*/",
+      "destination": "https://api-codeglimpse.cyclic.cloud/api/v1/:path*/"
+    },
+    {
+      "source": "/api/v1/:path*",
+      "destination": "https://api-codeglimpse.cyclic.cloud/api/v1/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/"
+    }
+  ]
+}
