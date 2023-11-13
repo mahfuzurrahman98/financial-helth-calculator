@@ -57,11 +57,10 @@ const Login = () => {
 
       // wait for 1 second before redirecting to dashboard
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate('/me');
+      navigate('/dashboard');
     } catch (err: any) {
       setLoading(false);
-      console.log(err.response);
-      // setError(err.response.data.detail);
+      setError(err.response.data.detail);
     }
   };
 
