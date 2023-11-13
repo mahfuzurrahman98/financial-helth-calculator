@@ -17,7 +17,7 @@ class Company(Base):
         onupdate=func.now(),
         server_onupdate=func.now()
     )
-    deleted_at = Column(TIMESTAMP, nullable=True)
+    deleted_at = Column(TIMESTAMP, nullable=True, default=None)
 
     # one company to one user
     user = relationship('User', back_populates='company', uselist=False)

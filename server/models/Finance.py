@@ -22,6 +22,7 @@ class Finance(Base):
         onupdate=func.now(),
         server_onupdate=func.now()
     )
+    deleted_at = Column(TIMESTAMP, nullable=True, default=None)
 
     # many finances to one company
     company = relationship('Company', back_populates='finances')
