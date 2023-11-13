@@ -27,8 +27,7 @@ router = APIRouter()
 
 
 @router.get('/finances/dashboard')
-def dashboard(request: Request, user=Depends(get_current_user),
-              ):
+def dashboard(request: Request, user=Depends(get_current_user)):
     try:
         finances = (
             db.query(Finance)
@@ -57,11 +56,10 @@ def dashboard(request: Request, user=Depends(get_current_user),
             total_score = sum([finance.score for finance in finances])
             average_score = total_score / total_finances
 
-            recent_finances = finances[:5]
+            recent_finances = finances[:6]
+            recent_finances = [finance.serialize() for finance in recent_finances]
         else:
             finances = []
-
-        finances = [finance.serialize() for finance in finances]
 
         return JSONResponse(
             status_code=200,
@@ -74,6 +72,7 @@ def dashboard(request: Request, user=Depends(get_current_user),
                     'total_expense': total_expense,
                     'last_debts': last_debts,
                     'last_assets': last_assets,
+                    'total_score': total_score,
                     'average_score': average_score
                 }
             }
@@ -145,14 +144,22 @@ def index(
             .count()
         )
 
-        finances = [finance.serialize() for finance in finances]
+        _finances = []
+        if total_finances > 0:
+            for finance in finances:
+                _finance = finance.serialize()
+                # with data and time also
+                _finance['calculated_at'] = finance.created_at.strftime(
+                    "%d %b %Y, %H:%M"
+                )
+                _finances.append(_finance)
 
         return JSONResponse(
             status_code=200,
             content={
                 'detail': 'Finances fetched successfully',
                 'data': {
-                    'finances': finances,
+                    'finances': _finances,
                     'total': total_finances
                 }
             }
