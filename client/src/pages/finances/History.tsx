@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
+import { categorizeHealthScore, categorizeHealthScoreColor } from '../../helpers';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { HistoryType, statusType } from '../../types';
 import RootLayout from '../RootLayout';
@@ -74,7 +75,10 @@ const History = () => {
                   Score
                 </th>
                 <th className="text-justify border border-gray-400 px-2 py-2">
-                  Date
+                  Calculated At
+                </th>
+                <th className="text-justify border border-gray-400 px-2 py-2">
+                  Verdict
                 </th>
               </tr>
             </thead>
@@ -99,6 +103,19 @@ const History = () => {
                   <td className="border border-gray-400 px-2 py-2">
                     {finance.calculated_at}
                   </td>
+                  <td className="border border-gray-400 px-2 py-2">
+                        <span
+                          className={`inline-block px-2 py-1 rounded-md text-sm text-white font-semibold ${
+                            finance.score == null
+                              ? 'bg-gray-400 text-gray-800'
+                              : categorizeHealthScoreColor(finance.score)
+                          }`}
+                        >
+                          {categorizeHealthScore(
+                            finance.score ? finance.score : 0
+                          )}
+                        </span>
+                      </td>
                 </tr>
               ))}
             </tbody>

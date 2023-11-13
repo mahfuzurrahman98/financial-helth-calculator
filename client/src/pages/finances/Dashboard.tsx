@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import Chart from 'react-google-charts';
 import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
+import {
+  categorizeHealthScore,
+  categorizeHealthScoreColor,
+} from '../../helpers';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { DashboardDataType, FinanceType, statusType } from '../../types';
 import RootLayout from '../RootLayout';
@@ -252,6 +256,9 @@ const Dashboard = () => {
                   <th className="text-left border border-gray-400 p-2">
                     Score
                   </th>
+                  <th className="text-left border border-gray-400 p-2">
+                    Verdict
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -275,6 +282,19 @@ const Dashboard = () => {
                       </td>
                       <td className="border border-gray-400 px-2 py-2">
                         {finance.score?.toFixed(2)}
+                      </td>
+                      <td className="border border-gray-400 px-2 py-2">
+                        <span
+                          className={`inline-block px-2 py-1 rounded-md text-sm text-white font-semibold ${
+                            finance.score == null
+                              ? 'bg-gray-400 text-gray-800'
+                              : categorizeHealthScoreColor(finance.score)
+                          }`}
+                        >
+                          {categorizeHealthScore(
+                            finance.score ? finance.score : 0
+                          )}
+                        </span>
                       </td>
                     </tr>
                   )
