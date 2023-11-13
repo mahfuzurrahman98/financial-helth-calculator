@@ -30,6 +30,64 @@ function categorizeHealthScoreColor(score: number) {
   }
 }
 
-export { categorizeHealthScore, categorizeHealthScoreColor };
+function generateSuggestions(
+  income: number,
+  expense: number,
+  debt: number,
+  assets: number,
+  score: number
+) {
+  const disposableIncome = income - expense;
+  const debtToIncomeRatio = (debt / income) * 100;
+  const netWorth = assets - debt;
 
+  const customSuggestions = [];
+
+  if (score < 20) {
+    customSuggestions.push('You should consider filing for bankruptcy.');
+  } else if (score < 40) {
+    if (debtToIncomeRatio > 50) {
+      customSuggestions.push('You should consider paying off your debts.');
+    } else {
+      customSuggestions.push('You should consider increasing your income.');
+    }
+  } else if (score < 60) {
+    customSuggestions.push('You could do better.');
+
+    if (disposableIncome < 0) {
+      customSuggestions.push('You should consider increasing your income.');
+    } else {
+      if (debtToIncomeRatio > 50) {
+        customSuggestions.push('You should consider paying off your debts.');
+      } else {
+        customSuggestions.push('You should consider decreasing your expenses.');
+      }
+    }
+  } else if (score < 80) {
+    customSuggestions.push(
+      'You are just on the edge of being financially healthy.'
+    );
+
+    if (debtToIncomeRatio > 50) {
+      customSuggestions.push('Keep it up, and consider paying off your debts.');
+    } else {
+      customSuggestions.push(
+        'Keep it up, and consider decreasing your expenses.'
+      );
+    }
+  } else if (score < 100) {
+    customSuggestions.push('You are on the top of your game!');
+  }
+
+  return {
+    score: score.toFixed(2),
+    customSuggestions: customSuggestions,
+  };
+}
+
+export {
+  categorizeHealthScore,
+  categorizeHealthScoreColor,
+  generateSuggestions
+};
 
