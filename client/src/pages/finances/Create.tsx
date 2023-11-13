@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Speedometer from 'react-d3-speedometer';
 import { toast, Toaster } from 'react-hot-toast';
-import Navbar from '../../components/Navbar';
+import ComponentLoader from '../../components/ComponentLoader';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import { FinaceFormData, statusType } from '../../types';
+import RootLayout from '../RootLayout';
 
 const Create = () => {
   // State to store form values
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FinaceFormData>({
     income: '',
     expense: '',
     debts: '',
@@ -14,6 +16,10 @@ const Create = () => {
     score: '',
   });
   const [loading, setLoading] = useState<boolean>(false);
+  const [status, setStatus] = useState<statusType>({
+    loading: false,
+    error: null,
+  });
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -57,151 +63,158 @@ const Create = () => {
   };
 
   return (
-    <div>
-      <Toaster
-        position="bottom-right"
-        toastOptions={{
-          className: '',
-          duration: 5000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-          },
-          success: {
-            duration: 3000,
-          },
-        }}
-      />
-      <Navbar />
+    <ComponentLoader
+      status={status}
+      component={
+        <RootLayout>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              className: '',
+              duration: 5000,
+              style: {
+                background: '#363636',
+                color: '#fff',
+              },
+              success: {
+                duration: 3000,
+              },
+            }}
+          />
 
-      <div className="container mx-auto mt-8 px-4 lg:grid lg:grid-cols-2">
-        <div className="">
-          <h1 className="text-2xl font-semibold mb-4">
-            Calculate Finance Health
-          </h1>
+          <div className="container mx-auto mt-8 px-4 lg:grid lg:grid-cols-2">
+            <div className="">
+              <h1 className="text-2xl font-semibold mb-4">
+                Calculate Finance Health
+              </h1>
 
-          <form onSubmit={handleSubmit} className="max-w-md">
-            <div className="mb-4">
-              <label htmlFor="income" className="block text-md font-medium">
-                Income
-              </label>
-              <input
-                type="number"
-                name="income"
-                id="income"
-                value={formData.income}
-                onChange={handleChange}
-                className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
-                  formData.score == '' ? '' : 'bg-gray-200'
-                }`}
-                placeholder="Enter your income"
-                required
-                readOnly={formData.score != ''}
-              />
+              <form onSubmit={handleSubmit} className="max-w-md">
+                <div className="mb-4">
+                  <label htmlFor="income" className="block text-md font-medium">
+                    Income
+                  </label>
+                  <input
+                    type="number"
+                    name="income"
+                    id="income"
+                    value={formData.income}
+                    onChange={handleChange}
+                    className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
+                      formData.score == '' ? '' : 'bg-gray-200'
+                    }`}
+                    placeholder="Enter your income"
+                    required
+                    readOnly={formData.score != ''}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label
+                    htmlFor="expense"
+                    className="block text-md font-medium"
+                  >
+                    expense
+                  </label>
+                  <input
+                    type="number"
+                    name="expense"
+                    id="expense"
+                    value={formData.expense}
+                    onChange={handleChange}
+                    className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
+                      formData.score == '' ? '' : 'bg-gray-200'
+                    }`}
+                    placeholder="Enter your expense"
+                    required
+                    readOnly={formData.score != ''}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label htmlFor="debts" className="block text-md font-medium">
+                    Debts
+                  </label>
+                  <input
+                    type="number"
+                    name="debts"
+                    id="debts"
+                    value={formData.debts}
+                    onChange={handleChange}
+                    className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
+                      formData.score == '' ? '' : 'bg-gray-200'
+                    }`}
+                    placeholder="Enter your debts"
+                    required
+                    readOnly={formData.score != ''}
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label htmlFor="assets" className="block text-md font-medium">
+                    Assets
+                  </label>
+                  <input
+                    type="number"
+                    name="assets"
+                    id="assets"
+                    value={formData.assets}
+                    onChange={handleChange}
+                    className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
+                      formData.score == '' ? '' : 'bg-gray-200'
+                    }`}
+                    placeholder="Enter your assets"
+                    required
+                    readOnly={formData.score != ''}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className={`bg-green-700 text-white px-3 py-1 rounded-md text-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ${
+                    loading || formData.score != ''
+                      ? 'opacity-50 cursor-not-allowed'
+                      : ''
+                  }`}
+                  disabled={loading || formData.score != ''}
+                >
+                  {loading ? 'Calculating...' : 'Calculate'}
+                </button>
+              </form>
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="expense" className="block text-md font-medium">
-                expense
-              </label>
-              <input
-                type="number"
-                name="expense"
-                id="expense"
-                value={formData.expense}
-                onChange={handleChange}
-                className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
-                  formData.score == '' ? '' : 'bg-gray-200'
-                }`}
-                placeholder="Enter your expense"
-                required
-                readOnly={formData.score != ''}
-              />
+            <div className="mt-5">
+              {formData.score != '' ? (
+                <>
+                  <h1 className="text-2xl font-semibold mb-4">Your Score</h1>
+                  <Speedometer
+                    value={parseFloat(formData.score)} // Change the value based on your score
+                    minValue={0}
+                    maxValue={100}
+                    segments={5}
+                    segmentColors={[
+                      '#00ff00',
+                      '#ffff00',
+                      '#0000ff',
+                      '#ff8000',
+                      '#ff0000',
+                    ]}
+                    customSegmentStops={[0, 20, 50, 80, 90, 100]}
+                  />
+
+                  <div>
+                    <p className="text-2xl font-semibold mt-4">
+                      Your Finance Health Score is {formData.score}%
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
-
-            <div className="mb-4">
-              <label htmlFor="debts" className="block text-md font-medium">
-                Debts
-              </label>
-              <input
-                type="number"
-                name="debts"
-                id="debts"
-                value={formData.debts}
-                onChange={handleChange}
-                className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
-                  formData.score == '' ? '' : 'bg-gray-200'
-                }`}
-                placeholder="Enter your debts"
-                required
-                readOnly={formData.score != ''}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="assets" className="block text-md font-medium">
-                Assets
-              </label>
-              <input
-                type="number"
-                name="assets"
-                id="assets"
-                value={formData.assets}
-                onChange={handleChange}
-                className={`mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800 ${
-                  formData.score == '' ? '' : 'bg-gray-200'
-                }`}
-                placeholder="Enter your assets"
-                required
-                readOnly={formData.score != ''}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className={`bg-green-700 text-white px-3 py-1 rounded-md text-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ${
-                loading || formData.score != ''
-                  ? 'opacity-50 cursor-not-allowed'
-                  : ''
-              }`}
-              disabled={loading || formData.score != ''}
-            >
-              {loading ? 'Calculating...' : 'Calculate'}
-            </button>
-          </form>
-        </div>
-
-        <div className="mt-5">
-          {formData.score != '' ? (
-            <>
-              <h1 className="text-2xl font-semibold mb-4">Your Score</h1>
-              <Speedometer
-                value={parseFloat(formData.score)} // Change the value based on your score
-                minValue={0}
-                maxValue={100}
-                segments={5}
-                segmentColors={[
-                  '#00ff00',
-                  '#ffff00',
-                  '#0000ff',
-                  '#ff8000',
-                  '#ff0000',
-                ]}
-                customSegmentStops={[0, 20, 50, 80, 90, 100]}
-              />
-
-              <div>
-                <p className="text-2xl font-semibold mt-4">
-                  Your Finance Health Score is {formData.score}%
-                </p>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
-    </div>
+          </div>
+        </RootLayout>
+      }
+    />
   );
 };
 
