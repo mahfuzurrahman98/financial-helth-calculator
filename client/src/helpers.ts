@@ -1,9 +1,35 @@
-const getHealthByScore = (score: string) => {
-  // convert to float
-  const _score = parseFloat(score);
-  if (_score >= 0.0 && _score <= 3.0) return 'bad';
-  if (_score >= 4.0 && _score <= 7.0) return 'normal';
-  if (_score >= 8.0 && _score <= 10.0) return 'good';
-};
+function categorizeHealthScore(score: number) {
+  if (score >= 80 && score <= 100) {
+    return 'Excellent';
+  } else if (score >= 60 && score < 80) {
+    return 'Good';
+  } else if (score >= 40 && score < 60) {
+    return 'Stable';
+  } else if (score >= 20 && score < 40) {
+    return 'Challenged';
+  } else if (score >= 0 && score < 20) {
+    return 'Critical';
+  } else {
+    return 'Invalid Score';
+  }
+}
 
-export { getHealthByScore };
+function categorizeHealthScoreColor(score: number) {
+  if (score >= 80 && score <= 100) {
+    return 'bg-green-700';
+  } else if (score >= 60 && score < 80) {
+    return 'bg-green-500';
+  } else if (score >= 40 && score < 60) {
+    return 'bg-yellow-700';
+  } else if (score >= 20 && score < 40) {
+    return 'bg-yellow-500';
+  } else if (score >= 0 && score < 20) {
+    return 'bg-red-600';
+  } else {
+    return 'bg-gray-500';
+  }
+}
+
+export { categorizeHealthScore, categorizeHealthScoreColor };
+
+
