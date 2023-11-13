@@ -14,7 +14,7 @@ const Router = () => {
           {routes &&
             routes.map((route: RouteType, key: number) => {
               if (route._protected === -1) {
-                // means thes route is public, it doesn't bother if the user is logged in or not
+                // means thes route is public, it doesn't bother whether the user is logged in or not
                 return (
                   <Route
                     key={key}
@@ -23,7 +23,7 @@ const Router = () => {
                   />
                 );
               } else {
-                // means the route is protected, it will check if the user is logged in or not
+                // means the route is protected, it will check whether the user is logged in or not
                 return (
                   <Route
                     key={key}

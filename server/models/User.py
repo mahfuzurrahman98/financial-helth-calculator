@@ -19,7 +19,7 @@ class User(Base):
     )
 
     # one user to one company
-    company = relationship('Company', back_populates='user')
+    company = relationship('Company', back_populates='user', uselist=False)
 
     def serialize(self):
         return {

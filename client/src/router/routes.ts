@@ -1,34 +1,28 @@
+import Guest from '../pages/Guest';
 import Home from '../pages/Home';
+import Login from '../pages/Login';
 import Register from '../pages/Register';
-import Signin from '../pages/Signin';
+import Create from '../pages/finances/Create';
+import Dashboard from '../pages/finances/Dashboard';
+import History from '../pages/finances/History';
+import Show from '../pages/finances/show';
 import Me from '../pages/profile/Me';
 
 
 import { RouteType } from '../types';
 
-/*
-GET: /login
-GET: /register
-
-GET: /dashboard
-
-GET: /finances/create
-GET: /finances/history
-GET: /finances/history/:id
-*/
-
 const routes: RouteType[] = [
   { path: '/', element: Home, _protected: -1 },
-  { path: '/login', element: Signin, _protected: 0 },
-  { path: '/register', element: Register, _protected: 0 },
-  { path: '/auth/callback', element: LoginCallback, _protected: 0 },
+  { path: '/guest', element: Guest, _protected: 0 },
+
+  { path: '/login', element: Login, _protected: 0 },
+  { path: '/register', element: Register, _protected: 0 },  
   { path: '/me', element: Me, _protected: 1 },
 
-  // { path: '/dashboard', element: Dashboard, _protected: 1 },
-  // { path: '/finances/create', element: CreateFinance, _protected: 1 },
-  // { path: '/finances/history', element: HistoryFinance, _protected: 1 },
-  // { path: '/finances/:id', element: HistoryFinance, _protected: 1 },
-  
+  { path: '/dashboard', element: Dashboard, _protected: 1 },
+  { path: '/finances/create', element: Create, _protected: 1 },
+  { path: '/finances/history', element: History, _protected: 1 },
+  { path: '/finances/:id', element: Show, _protected: 1 },  
 ];
 
 export default routes;

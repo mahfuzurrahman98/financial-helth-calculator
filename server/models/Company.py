@@ -20,7 +20,8 @@ class Company(Base):
     deleted_at = Column(TIMESTAMP, nullable=True)
 
     # one company to one user
-    user = relationship('User', back_populates='company')
+    user = relationship('User', back_populates='company', uselist=False)
+    
     # one company to many finances
     finances = relationship('Finance', back_populates='company')
 
@@ -28,4 +29,5 @@ class Company(Base):
         return {
             'id': self.id,
             'name': self.name,
+            'email': self.user.email,
         }

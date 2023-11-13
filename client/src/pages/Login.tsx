@@ -1,18 +1,18 @@
 import RootLayout from './RootLayout';
 
-const Register = () => {
+const Login = () => {
   
-  // const login = useRegister();
+  // const login = useLogin();
 
 
 
   return (
     <RootLayout>
       <div className="">
-        Register
+        Login
       </div>
     </RootLayout>
   );
 };
 
-export default Register;
+export default Login;

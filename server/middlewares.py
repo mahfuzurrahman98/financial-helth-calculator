@@ -2,9 +2,6 @@ from typing import Annotated
 
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, Request, status
-from fastapi.responses import JSONResponse
-from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError
 
 from database import db
 from models.User import User
@@ -42,9 +39,9 @@ async def get_current_user(request: Request):
 
     user = {
         'id': user.id,
-        'name': user.name,
-        'username': user.username,
-        'email': user.email
+        'email': user.email,
+        'company_id': user.company.id,
+        'company_name': user.company.name
     }
 
     return user
@@ -73,9 +70,9 @@ async def get_current_user2(request: Request):
 
     user = {
         'id': _user.id,
-        'name': _user.name,
-        'username': _user.username,
-        'email': _user.email
+        'email': _user.email,
+        'company_id': _user.company.id,
+        'company_name': _user.company.name
     }
 
     return user

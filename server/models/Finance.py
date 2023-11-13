@@ -1,5 +1,6 @@
 from sqlalchemy import TIMESTAMP, Column, Integer, func, Double
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import ForeignKey
 
 from database import Base
 
@@ -12,6 +13,7 @@ class Finance(Base):
     debt = Column(Double, nullable=False)
     assets = Column(Double, nullable=False)
     score = Column(Double, nullable=False)
+    company_id = Column(Integer, ForeignKey('companies.id'), nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.now())
     updated_at = Column(
         TIMESTAMP,
@@ -25,12 +27,11 @@ class Finance(Base):
     company = relationship('Company', back_populates='finances')
 
     def serialize(self):
-        # print(self.email)
         return {
             'id': self.id,
             'income': self.income,
             'expense': self.expense,
             'debt': self.debt,
             'assets': self.assets,
-            'score': self.score,
+            'score': self.score
         }

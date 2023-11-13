@@ -4,7 +4,6 @@ import UserIcon from '../assets/circle-user.svg';
 import Logo from '../assets/terminal.svg';
 import useAuth from '../hooks/useAuth';
 import useLogout from '../hooks/useLogout';
-import SearchBox from './SearchBox';
 
 const Navbar: FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
@@ -29,9 +28,6 @@ const Navbar: FC = () => {
           </Link>
         </div>
 
-        <div className="hidden md:block justify-start px-2 w-1/2">
-          <SearchBox />
-        </div>
 
         {auth.token != '' ? (
           <div className="flex justify-end items-center relative">

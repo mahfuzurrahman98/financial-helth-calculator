@@ -1,12 +1,17 @@
+from validators.financeValidator import validate_get_finance, validate_get_finance_by_company
+from sqlalchemy import desc
+from middlewares import get_current_user
 from typing import Annotated
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import JSONResponse
-from fastapi.responses import StreamingResponse
 
 from database import db
 from models.Finance import Finance
+from models.Company import Company
+from models.User import User
+from services.finance_health_calculator import finance_health_calculator
 
 
 class createFinanceSchema(BaseModel):
@@ -14,13 +19,7 @@ class createFinanceSchema(BaseModel):
     expense: float
     debt: float
     assets: float
-    score: float
 
-from services.code_review_service import get_response_openai
-from sqlalchemy import desc
-
-
-from middlewares import get_current_user
 
 router = APIRouter()
 
@@ -28,18 +27,20 @@ router = APIRouter()
 @router.post('/finances')
 def store(
     request: Request,
-    finance: createFinanceSchema
+    finance: createFinanceSchema,
     user=Depends(get_current_user),
 ):
     try:
-        score = get_response_openai(finance.income, finance.expense, finance.debt, finance.assets)
+        score = finance_health_calculator(
+            finance.income, finance.expense, finance.debt, finance.assets)
+        print(score)
         new_finance = Finance(
             income=finance.income,
             expense=finance.expense,
             debt=finance.debt,
             assets=finance.assets,
             score=score,
-            user_id=user.get('id')
+            company_id=user.get('company_id')
         )
         db.add(new_finance)
         db.commit()
@@ -57,64 +58,43 @@ def store(
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# get all public finances
+# get finances history by company
 @router.get('/finances')
 def index(
     request: Request,
-    q: str = '',
     page: int = 1,
     limit: int = 10,
+    user=Depends(get_current_user),
 ):
     try:
-        title_condition = Finance.title.ilike(f"%{q}%")
-        tag_condition = Finance.tags.ilike(f"%{q}%")
-
-        total_count = (
-            db.query(Finance)
-            .filter(
-                Finance.visibility == 1,
-                title_condition | tag_condition
-            )
-            .count()
-        )
-
         finances = (
             db.query(Finance)
-            .filter(
-                Finance.visibility == 1,
-                title_condition | tag_condition
-            )
+            .join(Company, Finance.company_id == Company.id)
+            .join(User, Company.user_id == User.id)
+            .filter(User.id == user.get('id'))
             .order_by(desc(Finance.created_at))
             .limit(limit)
             .offset((page - 1) * limit)
             .all()
         )
 
-        if len(finances) == 0:
-            return JSONResponse(
-                status_code=404,
-                content={
-                    'detail': 'No finances found',
-                }
-            )
+        total_finances = (
+            db.query(Finance)
+            .join(Company, Finance.company_id == Company.id)
+            .join(User, Company.user_id == User.id)
+            .filter(User.id == user.get('id'))
+            .count()
+        )
 
         finances = [finance.serialize() for finance in finances]
-        for finance in finances:
-            del finance['id']
-            del finance['visibility']
-            del finance['updated_at']
-            finance['mode'] = get_language(finance['_lang'])['mode']
-            del finance['_lang']
-            finance['source_code'] = finance['source_code'][:200] if len(
-                finance['source_code']) > 200 else finance['source_code']
-
+        
         return JSONResponse(
             status_code=200,
             content={
-                'detail': 'Snipppets fetched successfully',
+                'detail': 'Finances fetched successfully',
                 'data': {
                     'finances': finances,
-                    'total': total_count
+                    'total': total_finances
                 }
             }
         )
@@ -123,25 +103,19 @@ def index(
 
 
 # get a single finance
-@router.get('/finances/{uid}')
-def show(request: Request, finance: Finance = Depends(validate_finance)):
+@router.get('/finances/{id}')
+def show(request: Request, finance: Finance = Depends(validate_get_finance)):
     try:
-        _finance = finance.serialize()
-        del _finance['id']
-        del _finance['visibility']
-        del _finance['updated_at']
-        _finance['mode'] = get_language(_finance['_lang'])['mode']
-        del _finance['_lang']
+        finance = finance.serialize()
 
         return JSONResponse(
             status_code=200,
             content={
-                'detail': 'Snipppet fetched successfully',
+                'detail': 'Finance fetched successfully',
                 'data': {
-                    'finance': _finance
+                    'finance': finance                    
                 }
             }
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-

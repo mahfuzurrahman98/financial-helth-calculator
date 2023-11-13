@@ -1,4 +1,3 @@
-
 app routes:
 -----------
 
@@ -11,6 +10,8 @@ GET: /finances/create
 GET: /finances/history
 GET: /finances/history/:id
 
+GET: /guest
+
 api routes:
 -----------
 
@@ -20,3 +21,5 @@ POST: /users/auth/register
 POST: /finances
 GET: /finances/:id
 GET: /finances
+
+GET: /guest
