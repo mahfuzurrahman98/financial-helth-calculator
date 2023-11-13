@@ -18,17 +18,9 @@ class loginFormSchema(BaseModel):
 
 
 class createUserSchema(BaseModel):
-    name: str
     company_name: str
     email: EmailStr
     password: str
-
-    @field_validator('name')
-    def validate_blank_name_field(cls, value):
-        value = value.strip()
-        if value == '':
-            raise ValueError('Name cannot be blank')
-        return value
 
     @field_validator('company_name')
     def validate_blank_company_name_field(cls, value):
