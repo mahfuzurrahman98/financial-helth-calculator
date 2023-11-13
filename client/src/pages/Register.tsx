@@ -63,7 +63,7 @@ const Register = () => {
                 className="float-right focus:outline-none"
                 onClick={() => setError('')}
               >
-                <span className=" font-semibold">&times;</span>
+                <span className="font-semibold">&times;</span>
               </button>
             </div>
           )}
