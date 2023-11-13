@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserIcon from '../assets/circle-user.svg';
-import Logo from '../assets/terminal.svg';
+import Logo from '../assets/money.png';
 import useAuth from '../hooks/useAuth';
 import useLogout from '../hooks/useLogout';
 
@@ -17,59 +16,37 @@ const Navbar: FC = () => {
         <div className="flex items-center">
           <Link
             to="/"
-            className="flex items-end py-2 rounded-full"
+            className="flex items-center py-2 rounded-full"
           >
             <div>
-              <img src={Logo} className="w-7" alt="" />
+              <img src={Logo} className="w-12" alt="" />
             </div>
-            <div className="text-2xl font-extrabold leading-none">
-              Codeglimpse
+            <div className="text-2xl font-extrabold text-green-800 leading-none ml-2">
+              Finance Helth
             </div>
           </Link>
         </div>
 
 
         {auth.token != '' ? (
-          <div className="flex justify-end items-center relative">
-            <div className="flex items-center">
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="inline-flex items-center relative p-1 border rounded-full hover:shadow-lg focus:outline-none"
-              >
-                <img
-                  src={auth.picture?.length ? auth.picture : UserIcon}
-                  className="block flex-grow-0 flex-shrink-0 w-8 rounded-full"
-                  alt="User Icon"
-                />
-              </button>
-
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-40 w-48 bg-white border rounded-lg shadow-lg z-10">
-                  <Link
-                    to="/p/library"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                  >
-                    Library
-                  </Link>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
-                    onClick={() => logout()}
-                  >
-                    Logout
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
+         <div className="flex justify-end items-center">
+         <div className="flex items-center">
+           <Link
+             to="/dashboard"
+             className="bg-green-700 text-white px-3 py-1 rounded-md hover:bg-green-600"
+           >
+             Dashboard
+           </Link>
+         </div>
+       </div>
         ) : (
           <div className="flex justify-end items-center">
             <div className="flex items-center">
               <Link
-                to="/signin"
-                className="bg-black text-white px-4 py-1 rounded-full hover:bg-gray-700"
+                to="/login"
+                className="bg-green-700 text-white px-3 py-1 rounded-md hover:bg-green-600"
               >
-                Sign in
+                Login
               </Link>
             </div>
           </div>

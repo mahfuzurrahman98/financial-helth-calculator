@@ -44,12 +44,12 @@ def register(
             user_id=new_user.id
         )
         db.add(new_company)
-        db.commit()        
+        db.commit()
 
         _new_company = new_company.serialize()
         resp = {
             'detail': 'Company registered successfully',
-            'data': _new_company 
+            'data': _new_company
         }
         return JSONResponse(status_code=201, content=resp)
 
@@ -76,11 +76,17 @@ def login(
         access_token = Auth.create_access_token(data={'sub': user.email})
         print(access_token)
         refresh_token = Auth.create_refresh_token(data={'sub': user.email})
+
+        company = user.company
         response = JSONResponse(
             status_code=status.HTTP_200_OK,
             content={
                 'detail': 'Login successful',
                 'data': {
+                    'company': {
+                        'id': company.id,
+                        'name': company.name
+                    },
                     'user': user.serialize(),
                     'access_token': access_token
                 }
@@ -142,12 +148,16 @@ def refresh_token(request: Request):
 
     try:
         access_token = Auth.create_access_token(data={'sub': user.email})
-
+        company = user.company
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content={
                 'detail': 'Authentication successful',
                 'data': {
+                    'company': {
+                        'id': company.id,
+                        'name': company.name
+                    },
                     'user': _user,
                     'access_token': access_token,
                 }

@@ -8,9 +8,8 @@ const Me = () => {
       <Navbar />
       <h1>My Profile</h1>
       <div className="flex flex-col">
-        <p>Name: {auth.name} </p>
+        <p>Name: {auth.company_name} </p>
         <p>Email: {auth.email}</p>
-        <p>Picture: {auth.picture}</p>
         <p>Token: {auth.token}</p>
       </div>
     </div>

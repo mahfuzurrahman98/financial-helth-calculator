@@ -10,7 +10,7 @@ class Finance(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     income = Column(Double, nullable=False)
     expense = Column(Double, nullable=False)
-    debt = Column(Double, nullable=False)
+    debts = Column(Double, nullable=False)
     assets = Column(Double, nullable=False)
     score = Column(Double, nullable=False)
     company_id = Column(Integer, ForeignKey('companies.id'), nullable=False)
@@ -31,7 +31,7 @@ class Finance(Base):
             'id': self.id,
             'income': self.income,
             'expense': self.expense,
-            'debt': self.debt,
+            'debts': self.debts,
             'assets': self.assets,
             'score': self.score
         }

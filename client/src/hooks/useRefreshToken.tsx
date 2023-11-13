@@ -11,9 +11,10 @@ const useRefreshToken = () => {
       const data = response.data.data;
 
       setAuth({
-        name: data.user.name,
+        company_name: data.company.name,
+        company_id: data.company.id,
         email: data.user.email,
-        picture: localStorage.getItem('picture') || '',
+        user_id: data.user.id,
         token: data.access_token,
       });
 

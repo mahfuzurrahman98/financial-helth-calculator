@@ -20,9 +20,9 @@ const routes: RouteType[] = [
   { path: '/me', element: Me, _protected: 1 },
 
   { path: '/dashboard', element: Dashboard, _protected: 1 },
-  { path: '/finances/create', element: Create, _protected: 1 },
-  { path: '/finances/history', element: History, _protected: 1 },
+  { path: '/finances/calcuate', element: Create, _protected: 1 },
   { path: '/finances/:id', element: Show, _protected: 1 },  
+  { path: '/finances/history', element: History, _protected: 1 },
 ];
 
 export default routes;

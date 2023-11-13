@@ -1,15 +1,16 @@
-
 export type AuthContextType = {
   auth: {
-    name: string;
+    company_name: string;
+    company_id: number | null;
     email: string;
-    picture: string;
+    user_id: number | null;
     token: string;
   };
   setAuth: (auth: {
-    name: string;
+    company_name: string;
+    company_id: number | null;
     email: string;
-    picture: string;
+    user_id: number | null;
     token: string;
   }) => void;
 };
@@ -20,10 +21,8 @@ export type RouteType = {
   _protected: number; // {-1: public, 0: shouldBeLoggedOut, 1: shouldBeLoggedIn}
 };
 
-
 export type errorType = {
   code: number;
   message: string;
   description: string;
 };
-

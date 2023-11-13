@@ -6,9 +6,10 @@ const useLogout = () => {
 
   const logout = async () => {
     setAuth({
-      name: '',
+      company_name: '',
+      company_id: null,
       email: '',
-      picture: '',
+      user_id: null,
       token: '',
     });
     try {

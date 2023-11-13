@@ -1,4 +1,4 @@
-import PageLoad from '../assets/page_load.gif';
+import PageLoad from '../assets/future-penguin.gif';
 
 const Loading = () => {
   return (

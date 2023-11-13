@@ -3,15 +3,22 @@ import { FC, ReactNode, createContext, useState } from 'react';
 import { AuthContextType } from '../types';
 
 const initialAuthState = {
-  name: '',
+  company_name: '',
+  company_id: null,
   email: '',
-  picture: '',
+  user_id: null,
   token: '',
 };
 
 export const AuthContext = createContext<AuthContextType>({
   auth: initialAuthState,
-  setAuth: (newAuthState: { name: string; email: string; token: string }) => {
+  setAuth: (newAuthState: {
+    company_name: string;
+    company_id: number | null;
+    email: string;
+    user_id: number | null;
+    token: string;
+  }) => {
     console.log(newAuthState);
   },
 });
@@ -19,12 +26,11 @@ export const AuthContext = createContext<AuthContextType>({
 const AuthContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [auth, setAuth] = useState(initialAuthState);
 
-  const value = {
-    auth,
-    setAuth,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ auth, setAuth }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthContextProvider };

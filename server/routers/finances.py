@@ -17,7 +17,7 @@ from services.finance_health_calculator import finance_health_calculator
 class createFinanceSchema(BaseModel):
     income: float
     expense: float
-    debt: float
+    debts: float
     assets: float
 
 
@@ -32,12 +32,12 @@ def store(
 ):
     try:
         score = finance_health_calculator(
-            finance.income, finance.expense, finance.debt, finance.assets)
+            finance.income, finance.expense, finance.debts, finance.assets)
         print(score)
         new_finance = Finance(
             income=finance.income,
             expense=finance.expense,
-            debt=finance.debt,
+            debts=finance.debts,
             assets=finance.assets,
             score=score,
             company_id=user.get('company_id')
