@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
-import { categorizeHealthScore, categorizeHealthScoreColor } from '../../helpers';
+import {
+  categorizeHealthScore,
+  categorizeHealthScoreColor,
+} from '../../helpers';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { HistoryType, statusType } from '../../types';
 import RootLayout from '../RootLayout';
@@ -39,10 +42,9 @@ const History = () => {
       status={status}
       component={
         <RootLayout>
-         <h1 className="text-3xl font-semibold border-b-2 border-b-gray-600">
+          <h1 className="text-3xl font-semibold border-b-2 border-b-gray-600">
             Finance History
           </h1>
-
           <div className="">
             <Link
               to="/finances/calculate"
@@ -55,7 +57,6 @@ const History = () => {
               Calculate New Finance
             </Link>
           </div>
-
           <table className="w-full table-auto">
             <thead>
               <tr>
@@ -104,23 +105,20 @@ const History = () => {
                     {finance.calculated_at}
                   </td>
                   <td className="border border-gray-400 px-2 py-2">
-                        <span
-                          className={`inline-block px-2 py-1 rounded-md text-sm text-white font-semibold ${
-                            finance.score == null
-                              ? 'bg-gray-400 text-gray-800'
-                              : categorizeHealthScoreColor(finance.score)
-                          }`}
-                        >
-                          {categorizeHealthScore(
-                            finance.score ? finance.score : 0
-                          )}
-                        </span>
-                      </td>
+                    <span
+                      className={`inline-block px-2 py-1 rounded-md text-sm text-white font-semibold ${
+                        finance.score == null
+                          ? 'bg-gray-400 text-gray-800'
+                          : categorizeHealthScoreColor(finance.score)
+                      }`}
+                    >
+                      {categorizeHealthScore(finance.score ? finance.score : 0)}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-
           <div className="mt-4">
             <Link
               to="/dashboard"
