@@ -310,6 +310,13 @@ const Dashboard = () => {
                 View All History
               </Link>
             </div>
+
+            <div className="mt-4 bg-yellow-300 px-3 py-1 rounded-md">
+              <p className="text-red-900">
+                <span className="text-balck font-bold mr-1">N.B:</span>
+                We are using the latest 6 records as last 6 months data, if you calculate new finance then it will be treated as the latest month data.
+              </p>
+            </div>
           </div>
         </RootLayout>
       }
