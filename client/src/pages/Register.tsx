@@ -80,7 +80,7 @@ const Register = () => {
                   value={formData.company_name}
                   onChange={handleChange}
                   className="mt-1 px-2 py-1 w-full border rounded-md focus:outline-green-800"
-                  placeholder="Enter your company_name name"
+                  placeholder="Enter your company name"
                   autoComplete="company_name"
                   required
                 />
