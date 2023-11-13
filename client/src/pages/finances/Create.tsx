@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Speedometer from 'react-d3-speedometer';
 import { toast, Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { FinaceFormData, statusType } from '../../types';
@@ -88,8 +89,8 @@ const Create = () => {
                 Calculate Finance Health
               </h1>
 
-              <form onSubmit={handleSubmit} className="max-w-md">
-                <div className="mb-4">
+              <form onSubmit={handleSubmit} className="max-w-md shadow p-4">
+                <div className="mb-3">
                   <label htmlFor="income" className="block text-md font-medium">
                     Income
                   </label>
@@ -108,12 +109,12 @@ const Create = () => {
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-3">
                   <label
                     htmlFor="expense"
                     className="block text-md font-medium"
                   >
-                    expense
+                    Expense
                   </label>
                   <input
                     type="number"
@@ -130,7 +131,7 @@ const Create = () => {
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-3">
                   <label htmlFor="debts" className="block text-md font-medium">
                     Debts
                   </label>
@@ -149,7 +150,7 @@ const Create = () => {
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-3">
                   <label htmlFor="assets" className="block text-md font-medium">
                     Assets
                   </label>
@@ -167,7 +168,7 @@ const Create = () => {
                     readOnly={formData.score != ''}
                   />
                 </div>
-
+               
                 <button
                   type="submit"
                   className={`bg-green-700 text-white px-3 py-1 rounded-md text-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ${
@@ -179,6 +180,15 @@ const Create = () => {
                 >
                   {loading ? 'Calculating...' : 'Calculate'}
                 </button>
+
+                <div className="mb-2 flex justify-end">
+                  <Link
+                    to="/dashboard"
+                    className="underline text-green-700"
+                  >
+                    Back to Dashboard
+                  </Link>
+                </div>
               </form>
             </div>
 
