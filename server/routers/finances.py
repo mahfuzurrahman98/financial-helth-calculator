@@ -1,4 +1,4 @@
-from validators.financeValidator import validate_get_finance, validate_get_finance_by_company
+from validators.financeValidator import validate_get_finance
 from sqlalchemy import desc
 from middlewares import get_current_user
 from typing import Annotated
@@ -22,6 +22,65 @@ class createFinanceSchema(BaseModel):
 
 
 router = APIRouter()
+
+# get finance dashboard
+
+
+@router.get('/finances/dashboard')
+def dashboard(request: Request, user=Depends(get_current_user),
+              ):
+    try:
+        finances = (
+            db.query(Finance)
+            .join(Company, Finance.company_id == Company.id)
+            .join(User, Company.user_id == User.id)
+            .filter(User.id == user.get('id'))
+            .order_by(desc(Finance.created_at))
+            .all()
+        )
+
+        total_finances = len(finances)
+
+        # find total income, expense, last debts, and last assets
+        total_income = 0
+        total_expense = 0
+        last_debts = 0
+        last_assets = 0
+        average_score = 0
+        recent_finances = []
+
+        if total_finances > 0:
+            total_income = sum([finance.income for finance in finances])
+            total_expense = sum([finance.expense for finance in finances])
+            last_debts = finances[0].debts
+            last_assets = finances[0].assets
+            total_score = sum([finance.score for finance in finances])
+            average_score = total_score / total_finances
+
+            recent_finances = finances[:5]
+        else:
+            finances = []
+
+        finances = [finance.serialize() for finance in finances]
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                'detail': 'Finances fetched successfully',
+                'data': {
+                    'recent_finances': recent_finances,
+                    'total': total_finances,
+                    'total_income': total_income,
+                    'total_expense': total_expense,
+                    'last_debts': last_debts,
+                    'last_assets': last_assets,
+                    'average_score': average_score
+                }
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # create a finance
 @router.post('/finances')
@@ -87,7 +146,7 @@ def index(
         )
 
         finances = [finance.serialize() for finance in finances]
-        
+
         return JSONResponse(
             status_code=200,
             content={
@@ -113,7 +172,7 @@ def show(request: Request, finance: Finance = Depends(validate_get_finance)):
             content={
                 'detail': 'Finance fetched successfully',
                 'data': {
-                    'finance': finance                    
+                    'finance': finance
                 }
             }
         )
