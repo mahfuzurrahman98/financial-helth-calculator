@@ -1,18 +1,8 @@
 export type AuthContextType = {
   auth: {
-    company_name: string;
-    company_id: number | null;
-    email: string;
-    user_id: number | null;
     token: string;
   };
-  setAuth: (auth: {
-    company_name: string;
-    company_id: number | null;
-    email: string;
-    user_id: number | null;
-    token: string;
-  }) => void;
+  setAuth: (auth: { token: string }) => void;
 };
 
 export type RouteType = {

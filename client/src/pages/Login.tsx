@@ -41,10 +41,6 @@ const Login = () => {
       const respData = await response.data.data;
       console.log(data);
       setAuth({
-        company_name: respData.company.name,
-        company_id: respData.company.id,
-        email: respData.user.email,
-        user_id: respData.user.id,
         token: respData.access_token,
       });
       setLoading(false);
