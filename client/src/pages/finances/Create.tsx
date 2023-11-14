@@ -22,6 +22,7 @@ const Create = () => {
   });
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [status] = useState<statusType>({
     loading: false,
     error: null,
@@ -64,6 +65,7 @@ const Create = () => {
 
       setLoading(false);
     } catch (err: any) {
+      setError(err.response.data.detail);
       setLoading(false);
     }
   };
@@ -103,6 +105,19 @@ const Create = () => {
               </h1>
 
               <form onSubmit={handleSubmit} className="max-w-md shadow p-4">
+                {error && (
+                  <div className="bg-red-500 text-white px-3 py-1 rounded-md mb-4">
+                    {error}
+
+                    <button
+                      className="float-right focus:outline-none"
+                      onClick={() => setError('')}
+                    >
+                      <span className=" font-semibold">&times;</span>
+                    </button>
+                  </div>
+                )}
+
                 <div className="mb-3">
                   <label htmlFor="income" className="block text-md font-medium">
                     Income
