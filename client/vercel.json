@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/v1/:path*/",
-      "destination": "https://api-financial-helth-calculator.vercel.app/api/v1/:path*/"
+      "destination": "https://api-finance-health-calculator.vercel.app/api/v1/:path*/"
     },
     {
       "source": "/api/v1/:path*",
-      "destination": "https://api-financial-helth-calculator.vercel.app/api/v1/:path*"
+      "destination": "https://api-finance-health-calculator.vercel.app/api/v1/:path*"
     },
     {
       "source": "/:path*",
