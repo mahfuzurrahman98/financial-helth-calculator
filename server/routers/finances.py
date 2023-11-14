@@ -163,6 +163,34 @@ def index(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# create a finance score for guest user
+@router.post('/finances/guest')
+def guest(
+    request: Request,
+    finance: createFinanceSchema = Depends(validate_create_finance)
+):
+    try:
+        print(finance)
+        score = finance_health_calculator(
+            finance.income, finance.expense, finance.debts, finance.assets)
+        print(score)
+   
+
+        return JSONResponse(
+            status_code=status.HTTP_201_CREATED,
+            content={
+                'detail': 'Finance create successfully',
+                'data': {
+                    'finance': {
+                        'score': score
+                    }
+                }
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # get a single finance
 @router.get('/finances/{id}')
 def show(request: Request, finance: Finance = Depends(validate_get_finance)):
