@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import ComponentLoader from '../components/ComponentLoader';
 import {
   categorizeHealthScore,
@@ -212,6 +213,24 @@ const Guest = () => {
                   {loading ? 'Calculating...' : 'Calculate'}
                 </button>
               </form>
+
+              {!loading ? (
+                <div className="mt-4">
+                  <p>
+                    Already have an account?
+                    <br />
+                    <Link
+                      to="/login"
+                      className="underline text-green-700 font-semibold"
+                    >
+                      Login
+                    </Link>
+                    {' '} and get a more personalized experience.
+                  </p>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
 
             <div className="mt-5">
