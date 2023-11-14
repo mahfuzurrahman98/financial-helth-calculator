@@ -20,11 +20,11 @@ function categorizeHealthScoreColor(score: number) {
   if (score >= 85 && score <= 100) {
     return 'bg-green-700';
   } else if (score >= 65 && score < 85) {
-    return 'bg-green-500';
+    return 'bg-green-600';
   } else if (score >= 45 && score < 65) {
     return 'bg-purple-600';
   } else if (score >= 25 && score < 45) {
-    return 'bg-purple-500';
+    return 'bg-orange-500';
   } else if (score >= 10 && score < 25) {
     return 'bg-yellow-400';
   } else if (score < 10) {
