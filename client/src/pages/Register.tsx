@@ -22,6 +22,15 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (
+      formData.company_name.trim() === '' ||
+      formData.email.trim() === '' ||
+      formData.password.trim() === ''
+    ) {
+      return setError('Please fill in all fields');
+    }
+
     setLoading(true);
 
     try {
@@ -70,7 +79,10 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <div className="mb-4">
-                <label htmlFor="company_name" className="block text-md font-medium">
+                <label
+                  htmlFor="company_name"
+                  className="block text-md font-medium"
+                >
                   Company
                 </label>
                 <input

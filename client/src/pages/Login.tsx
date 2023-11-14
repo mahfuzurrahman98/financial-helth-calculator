@@ -32,6 +32,11 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (formData.email.trim() === '' || formData.password.trim() === '') {
+      return setError('Please fill in all fields');
+    }
+    
     setLoading(true);
 
     try {
