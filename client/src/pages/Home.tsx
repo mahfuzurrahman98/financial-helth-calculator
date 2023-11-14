@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import RootLayout from './RootLayout';
 
 const Home = () => {
+  const { auth } = useAuth();
+
   return (
     <RootLayout>
       <div className="container mx-auto mt-10 text-center">
@@ -24,7 +27,7 @@ const Home = () => {
               comprehensive analysis of your financial health.
             </p>
             <Link
-              to="/finances/calculate"
+              to={auth.token != '' ? '/finances/calculate' : '/guest'}
               className="bg-green-700 text-white px-3 py-1 rounded-md text-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800"
             >
               Get Started &rarr;
