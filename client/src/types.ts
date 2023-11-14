@@ -32,7 +32,7 @@ export type HistoryType = FinanceType & {
 
 export type DashboardDataType = {
   recent_finances: FinanceType[];
-  total: number;
+  total_finances_count: number;
   total_income: number;
   total_expense: number;
   last_debts: number;

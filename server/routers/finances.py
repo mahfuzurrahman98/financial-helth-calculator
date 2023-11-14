@@ -68,7 +68,7 @@ def dashboard(request: Request, user=Depends(get_current_user)):
                 'detail': 'Finances fetched successfully',
                 'data': {
                     'recent_finances': recent_finances,
-                    'total': total_finances,
+                    'total_finances_count': total_finances,
                     'total_income': total_income,
                     'total_expense': total_expense,
                     'last_debts': last_debts,
