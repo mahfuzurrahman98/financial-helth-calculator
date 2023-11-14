@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RootLayout from './RootLayout';
 
 import { Toaster, toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 
 const Register = () => {
@@ -142,12 +143,12 @@ const Register = () => {
           <div className="mt-4">
             <p>
               Already have an account?{' '}
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="underline text-green-700 font-semibold"
               >
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </div>

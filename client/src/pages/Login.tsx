@@ -2,7 +2,7 @@ import { useState } from 'react';
 import RootLayout from './RootLayout';
 
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 
@@ -151,12 +151,12 @@ const Login = () => {
           <div className="mt-4">
             <p>
               Don't have an account?{' '}
-              <a
-                href="/register"
+              <Link
+                to="/register"
                 className="underline text-green-700 font-semibold"
               >
                 Register
-              </a>
+              </Link>
             </p>
           </div>
         </div>
