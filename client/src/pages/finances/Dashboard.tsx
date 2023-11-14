@@ -21,7 +21,7 @@ const ScatterChart = ({ scatterChartData }: { scatterChartData: [] }) => {
       data={scatterChartData}
       // add border to the chart
       options={{
-        title: 'Scatter Plot Chart',
+        title: 'Score-Month Chart',
         hAxis: { title: 'Month', minValue: 0, maxValue: 12 },
         vAxis: { title: 'Score', minValue: 0, maxValue: 1 },
         trendlines: {
