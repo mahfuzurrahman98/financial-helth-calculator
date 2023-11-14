@@ -21,6 +21,8 @@ from utils import Auth  # as Module
 from utils.Hash import Hash  # as Class
 from validators.userValidator import check_existing_user
 
+from middlewares import get_current_user
+
 load_dotenv()
 router = APIRouter()
 
@@ -74,20 +76,14 @@ def login(
             )
 
         access_token = Auth.create_access_token(data={'sub': user.email})
-        print(access_token)
+        # print(access_token)
         refresh_token = Auth.create_refresh_token(data={'sub': user.email})
 
-        company = user.company
         response = JSONResponse(
             status_code=status.HTTP_200_OK,
             content={
                 'detail': 'Login successful',
                 'data': {
-                    'company': {
-                        'id': company.id,
-                        'name': company.name
-                    },
-                    'user': user.serialize(),
                     'access_token': access_token
                 }
             },
@@ -142,23 +138,16 @@ def refresh_token(request: Request):
         if not user:
             raise token_exception
 
-        _user = user.serialize()
     except Exception:
         return token_exception
 
     try:
         access_token = Auth.create_access_token(data={'sub': user.email})
-        company = user.company
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content={
                 'detail': 'Authentication successful',
                 'data': {
-                    'company': {
-                        'id': company.id,
-                        'name': company.name
-                    },
-                    'user': _user,
                     'access_token': access_token,
                 }
             },
@@ -175,6 +164,30 @@ def refresh_token(request: Request):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e),
         )
+
+
+# create a route to get profile
+@router.get('/users/profile')
+def profile(request: Request, user=Depends(get_current_user)):
+    try:
+        return JSONResponse(
+            status_code=200,
+            content={
+                'detail': 'User fetched successfully',
+                'data': {
+                    'company': {
+                        'id': user.get('company_id'),
+                        'name': user.get('company_name')
+                    },
+                    'user': {
+                        'id': user.get('id'),
+                        'email': user.get('email')
+                    }
+                }
+            }
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # Logout
