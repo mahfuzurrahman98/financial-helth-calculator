@@ -6,6 +6,20 @@ from models.Finance import Finance
 from models.Company import Company
 from utils.helpers import tags_arr_to_str
 from middlewares import get_current_user2
+from schemas.FinanceSchema import createFinanceSchema
+
+
+def validate_create_finance(
+    request: Request,
+    finance: createFinanceSchema,
+    user=Depends(get_current_user2)
+):
+    # all fileds should be non-negative
+    if finance.income < 0 or finance.expense < 0 or finance.debts < 0 or finance.assets < 0:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail='All fields should be non-negative'
+        )
 
 
 def validate_get_finance(

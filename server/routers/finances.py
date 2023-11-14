@@ -12,20 +12,13 @@ from models.Finance import Finance
 from models.Company import Company
 from models.User import User
 from services.finance_health_calculator import finance_health_calculator
-
-
-class createFinanceSchema(BaseModel):
-    income: float
-    expense: float
-    debts: float
-    assets: float
+from schemas.FinanceSchema import createFinanceSchema
 
 
 router = APIRouter()
 
+
 # get finance dashboard
-
-
 @router.get('/finances/dashboard')
 def dashboard(request: Request, user=Depends(get_current_user)):
     try:
