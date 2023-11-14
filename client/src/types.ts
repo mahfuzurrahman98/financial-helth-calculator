@@ -37,7 +37,7 @@ export type DashboardDataType = {
   total_expense: number;
   last_debts: number;
   last_assets: number;
-  total_score: number;
+  current_score: number;
   average_score: number;
 };
 
