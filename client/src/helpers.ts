@@ -1,16 +1,18 @@
 function categorizeHealthScore(score: number) {
-  if (score >= 80 && score <= 100) {
+  if (score >= 85 && score <= 100) {
     return 'Excellent';
-  } else if (score >= 60 && score < 80) {
+  } else if (score >= 65 && score < 85) {
     return 'Good';
-  } else if (score >= 40 && score < 60) {
+  } else if (score >= 45 && score < 65) {
     return 'Stable';
-  } else if (score >= 20 && score < 40) {
-    return 'Challenged';
-  } else if (score >= 0 && score < 20) {
+  } else if (score >= 25 && score < 45) {
+    return 'Challenging';
+  } else if (score >= 10 && score < 25) {
     return 'Critical';
+  } else if (score < 10) {
+    return 'Bankrupt';
   } else {
-    return 'Invalid Score';
+    return 'bg-gray-500';
   }
 }
 
@@ -103,3 +105,4 @@ export {
   categorizeHealthScoreColor,
   generateSuggestions
 };
+
