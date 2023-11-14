@@ -46,6 +46,7 @@ def dashboard(request: Request, user=Depends(get_current_user)):
         last_debts = 0
         last_assets = 0
         average_score = 0
+        total_score = 0
         recent_finances = []
 
         if total_finances > 0:
@@ -55,9 +56,9 @@ def dashboard(request: Request, user=Depends(get_current_user)):
             last_assets = finances[0].assets
             total_score = sum([finance.score for finance in finances])
             average_score = total_score / total_finances
-
             recent_finances = finances[:6]
-            recent_finances = [finance.serialize() for finance in recent_finances]
+            recent_finances = [finance.serialize()
+                               for finance in recent_finances]
         else:
             finances = []
 
@@ -72,7 +73,7 @@ def dashboard(request: Request, user=Depends(get_current_user)):
                     'total_expense': total_expense,
                     'last_debts': last_debts,
                     'last_assets': last_assets,
-                    'total_score': total_score,
+                    'current_score': finances[0].score if total_finances > 0 else 0,
                     'average_score': average_score
                 }
             }
