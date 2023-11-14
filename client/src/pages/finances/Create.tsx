@@ -99,7 +99,7 @@ const Create = () => {
             }}
           />
 
-          <div className="container mx-auto mt-8 px-4 lg:grid lg:grid-cols-2">
+          <div className="container mx-auto mt-8 lg:grid lg:grid-cols-2">
             <div className="">
               <h1 className="text-3xl font-bold mb-4">
                 Calculate Finance Health
