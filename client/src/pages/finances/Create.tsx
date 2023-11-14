@@ -58,7 +58,6 @@ const Create = () => {
         parseFloat(formData.income),
         parseFloat(formData.expense),
         parseFloat(formData.debts),
-        parseFloat(formData.assets),
         parseFloat(respData.finance.score)
       );
       setSuggestions(_suggestions);
