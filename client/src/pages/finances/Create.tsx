@@ -22,7 +22,7 @@ const Create = () => {
   });
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [status, setStatus] = useState<statusType>({
+  const [status] = useState<statusType>({
     loading: false,
     error: null,
   });

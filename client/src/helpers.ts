@@ -40,7 +40,7 @@ function generateSuggestions(
   const disposableIncome = income - expense;
   const debtToIncomeRatio = (debts / income) * 100;
   const netWorth = assets - debts;
-
+  netWorth;
   const customSuggestions = [];
 
   if (score < 20) {

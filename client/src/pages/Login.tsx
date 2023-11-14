@@ -13,7 +13,7 @@ const Login = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
