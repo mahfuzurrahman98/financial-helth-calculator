@@ -21,6 +21,7 @@ def validate_create_finance(
             detail='All fields should be non-negative'
         )
 
+    return finance
 
 def validate_get_finance(
     request: Request,

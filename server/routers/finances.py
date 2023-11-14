@@ -1,4 +1,4 @@
-from validators.financeValidator import validate_get_finance
+from validators.financeValidator import validate_get_finance, validate_create_finance
 from sqlalchemy import desc
 from middlewares import get_current_user
 from typing import Annotated
@@ -79,10 +79,11 @@ def dashboard(request: Request, user=Depends(get_current_user)):
 @router.post('/finances')
 def store(
     request: Request,
-    finance: createFinanceSchema,
+    finance: createFinanceSchema = Depends(validate_create_finance),
     user=Depends(get_current_user),
 ):
     try:
+        print(finance)
         score = finance_health_calculator(
             finance.income, finance.expense, finance.debts, finance.assets)
         print(score)
