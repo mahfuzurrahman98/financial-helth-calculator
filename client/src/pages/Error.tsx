@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/terminal.svg';
+import Logo from '../assets/money.png';
 import errors from '../lib/data/errors';
 import { errorType } from '../types';
 
