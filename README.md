@@ -5,7 +5,7 @@ Overview
 
 Finance Health Calculator is a web application designed to help users manage and analyze their finances for a healthier financial future. It provides features such as calculating financial health scores, visualizing financial data, and offering personalized suggestions based on the user's financial metrics.
 
-Live at: [https://finance-helth-calculator.vercel.app](https://finance-helth-calculator.vercel.app)
+Live at: [https://finance-health-calculator.vercel.app](https://finance-health-calculator.vercel.app)
 
 Motivation
 ----------
