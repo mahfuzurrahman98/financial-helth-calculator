@@ -36,12 +36,10 @@ function generateSuggestions(
   income: number,
   expense: number,
   debts: number,
-  assets: number,
   score: number
 ) {
   const disposableIncome = income - expense;
   const debtToIncomeRatio = (debts / income) * 100;
-  const netWorth = assets - debts;
 
   const customSuggestions = [];
 
