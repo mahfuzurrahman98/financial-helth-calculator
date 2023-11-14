@@ -33,13 +33,13 @@ function categorizeHealthScoreColor(score: number) {
 function generateSuggestions(
   income: number,
   expense: number,
-  debt: number,
+  debts: number,
   assets: number,
   score: number
 ) {
   const disposableIncome = income - expense;
-  const debtToIncomeRatio = (debt / income) * 100;
-  const netWorth = assets - debt;
+  const debtToIncomeRatio = (debts / income) * 100;
+  const netWorth = assets - debts;
 
   const customSuggestions = [];
 
@@ -79,10 +79,7 @@ function generateSuggestions(
     customSuggestions.push('You are on the top of your game!');
   }
 
-  return {
-    score: score.toFixed(2),
-    customSuggestions: customSuggestions,
-  };
+  return customSuggestions;
 }
 
 export {
