@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Speedometer from 'react-d3-speedometer';
 import { toast, Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
@@ -196,21 +195,7 @@ const Create = () => {
               {formData.score != '' ? (
                 <>
                   <h1 className="text-2xl font-semibold mb-4">Your Score</h1>
-                  <Speedometer
-                    value={parseFloat(formData.score)} // Change the value based on your score
-                    minValue={0}
-                    maxValue={100}
-                    segments={5}
-                    segmentColors={[
-                      '#00ff00',
-                      '#ffff00',
-                      '#0000ff',
-                      '#ff8000',
-                      '#ff0000',
-                    ]}
-                    customSegmentStops={[0, 20, 50, 80, 90, 100]}
-                  />
-
+                  
                   <div>
                     <p className="text-2xl font-semibold mt-4">
                       Your Finance Health Score is {formData.score}%
