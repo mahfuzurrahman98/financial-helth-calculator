@@ -32,6 +32,7 @@ const Register = () => {
       return setError('Please fill in all fields');
     }
 
+    setError('');
     setLoading(true);
 
     try {

@@ -33,6 +33,7 @@ const Create = () => {
   // Function to handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null);
     setLoading(true);
 
     if (formData.income == '') {

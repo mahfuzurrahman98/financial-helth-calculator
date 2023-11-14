@@ -37,6 +37,7 @@ const Login = () => {
       return setError('Please fill in all fields');
     }
     
+    setError('');
     setLoading(true);
 
     try {
