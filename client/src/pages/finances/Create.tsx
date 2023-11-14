@@ -2,6 +2,11 @@ import { useState } from 'react';
 import { toast, Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import ComponentLoader from '../../components/ComponentLoader';
+import {
+  categorizeHealthScore,
+  categorizeHealthScoreColor,
+  generateSuggestions,
+} from '../../helpers';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import { FinaceFormData, statusType } from '../../types';
 import RootLayout from '../RootLayout';
@@ -15,6 +20,7 @@ const Create = () => {
     assets: '',
     score: '',
   });
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [status, setStatus] = useState<statusType>({
     loading: false,
@@ -47,6 +53,15 @@ const Create = () => {
         ...formData,
         score: respData.finance.score.toString(),
       });
+
+      let _suggestions = generateSuggestions(
+        parseFloat(formData.income),
+        parseFloat(formData.expense),
+        parseFloat(formData.debts),
+        parseFloat(formData.assets),
+        parseFloat(respData.finance.score)
+      );
+      setSuggestions(_suggestions);
 
       setLoading(false);
     } catch (err: any) {
@@ -84,7 +99,7 @@ const Create = () => {
 
           <div className="container mx-auto mt-8 px-4 lg:grid lg:grid-cols-2">
             <div className="">
-              <h1 className="text-2xl font-semibold mb-4">
+              <h1 className="text-3xl font-bold mb-4">
                 Calculate Finance Health
               </h1>
 
@@ -167,7 +182,7 @@ const Create = () => {
                     readOnly={formData.score != ''}
                   />
                 </div>
-               
+
                 <button
                   type="submit"
                   className={`bg-green-700 text-white px-3 py-1 rounded-md text-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ${
@@ -180,28 +195,60 @@ const Create = () => {
                   {loading ? 'Calculating...' : 'Calculate'}
                 </button>
 
-                <div className="mb-2 flex justify-end">
-                  <Link
-                    to="/dashboard"
-                    className="underline text-green-700"
-                  >
-                    Back to Dashboard
-                  </Link>
-                </div>
+                {!loading ? (
+                  <div className="mb-2 flex justify-end">
+                    <Link to="/dashboard" className="underline text-green-700">
+                      Back to Dashboard
+                    </Link>
+                  </div>
+                ) : (
+                  <></>
+                )}
               </form>
             </div>
 
             <div className="mt-5">
               {formData.score != '' ? (
                 <>
-                  <h1 className="text-2xl font-semibold mb-4">Your Score</h1>
-                  
+                  <h2 className="text-2xl font-bold mb-4">Your Score</h2>
+
                   <div>
-                    <p className="text-2xl font-semibold mt-4">
-                      Your Finance Health Score is {formData.score}%
+                    <p className="text-lg font-semibold mt-4">
+                      Your Finance Health Score is{' '}
+                      {parseFloat(formData.score).toFixed(2)}% which is
+                      considered as
+                      <span
+                        className={`ml-1 px-2 py-1 rounded-md text-sm text-white ${categorizeHealthScoreColor(
+                          parseFloat(formData.score)
+                        )}`}
+                      >
+                        {categorizeHealthScore(parseFloat(formData.score))}
+                      </span>
                     </p>
+
+                    <ul className="mt-4 list-disc list-inside">
+                      {suggestions.map((suggestion, key) => (
+                        <li
+                          key={key}
+                          className="text-md font-semibold text-gray-800"
+                        >
+                          {suggestion}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </>
+              ) : (
+                <></>
+              )}
+
+              {loading && formData.score == '' ? (
+                <div className="mt-4">
+                  <p className="text-lg font-semibold">
+                    Please hold on while we calculate and analyze your finances
+                    health score...
+                  </p>
+                </div>
               ) : (
                 <></>
               )}
