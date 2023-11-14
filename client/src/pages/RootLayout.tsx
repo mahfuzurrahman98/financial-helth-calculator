@@ -6,7 +6,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="max-w-6xl w-full mt-5 flex flex-col mx-auto gap-y-5 px-4 lg:px-0">
+      <div className="max-w-6xl w-full mt-5 flex flex-col mx-auto gap-y-5 px-4">
         {children}
       </div>
       <Footer />

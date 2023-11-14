@@ -9,7 +9,7 @@ const Navbar: FC = () => {
   const logout = useLogout();
 
   return (
-    <div className="bg-white shadow px-3 lg:px-0">
+    <div className="bg-white shadow px-4">
       <nav className="w-full flex justify-between items-center mx-auto h-14 max-w-6xl">
         <div className="flex items-center">
           <Link to="/" className="flex items-center py-2 rounded-full">
