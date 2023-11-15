@@ -42,38 +42,40 @@ const History = () => {
       status={status}
       component={
         <RootLayout>
-          <h1 className="text-3xl font-semibold border-b-2 border-b-gray-600">
-            Finance History
-          </h1>
-          <div className="">
-            <Link
-              to="/finances/calculate"
-              className="float-right bg-green-700 text-white px-3 py-1 rounded-md text-md inline-block"
-            >
-              <span
-                className="font-bold mr-1"
-                dangerouslySetInnerHTML={{ __html: '&plus;' }}
-              />
-              Calculate New Finance
-            </Link>
+          <div className="mt-2 lg:mt-5">
+            <h1 className="text-3xl font-semibold border-b-2 border-b-gray-600">
+              Finance History
+            </h1>
+            <div className="mt-3">
+              <Link
+                to="/finances/calculate"
+                className="float-right bg-green-700 text-white px-3 py-1 rounded-md text-md inline-block"
+              >
+                <span
+                  className="font-bold mr-1"
+                  dangerouslySetInnerHTML={{ __html: '&plus;' }}
+                />
+                Calculate New Finance
+              </Link>
+            </div>
           </div>
           <table className="w-full table-auto">
             <thead>
               <tr>
                 <th className="text-left border border-gray-400 px-2 py-2">
-                  Income
+                  Income($)
                 </th>
                 <th className="text-left border border-gray-400 px-2 py-2">
-                  Expense
+                  Expense($)
                 </th>
                 <th className="text-left border border-gray-400 px-2 py-2">
-                  Debts
+                  Debts($)
                 </th>
                 <th className="text-left border border-gray-400 px-2 py-2">
-                  Assets
+                  Assets($)
                 </th>
                 <th className="text-left border border-gray-400 px-2 py-2">
-                  Score
+                  Score(%)
                 </th>
                 <th className="text-justify border border-gray-400 px-2 py-2">
                   Calculated At
@@ -87,16 +89,16 @@ const History = () => {
               {historyData.map((finance: HistoryType, key: number) => (
                 <tr key={key}>
                   <td className="border border-gray-400 px-2 py-2">
-                    ${finance.income}
+                    {finance.income}
                   </td>
                   <td className="border border-gray-400 px-2 py-2">
-                    ${finance.expense}
+                    {finance.expense}
                   </td>
                   <td className="border border-gray-400 px-2 py-2">
-                    ${finance.debts}
+                    {finance.debts}
                   </td>
                   <td className="border border-gray-400 px-2 py-2">
-                    ${finance.assets}
+                    {finance.assets}
                   </td>
                   <td className="border border-gray-400 px-2 py-2">
                     {finance.score?.toFixed(2)}
