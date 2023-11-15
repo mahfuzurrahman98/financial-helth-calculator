@@ -82,8 +82,8 @@ const Login = () => {
           },
         }}
       />
-      <div className="flex items-center justify-center">
-        <div className="bg-white p-6 md:px-8 py-6 rounded shadow-md w-96 mt-24 lg:mt-42">
+      <div className="flex items-center justify-center mt-8 lg:mt-24">
+        <div className="bg-white p-6 md:px-8 py-6 rounded shadow-md w-96">
           <h1 className="text-2xl font-semibold mb-6">Login</h1>
 
           {error && (
