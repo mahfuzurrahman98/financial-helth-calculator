@@ -99,9 +99,9 @@ const Create = () => {
             }}
           />
 
-          <div className="container mx-auto mt-8 lg:grid lg:grid-cols-2">
+          <div className="container mx-auto mt-5 md:mt-8 lg:grid lg:grid-cols-2">
             <div className="">
-              <h1 className="text-3xl font-bold mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold mb-4">
                 Calculate Finance Health
               </h1>
 

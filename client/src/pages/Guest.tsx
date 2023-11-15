@@ -99,7 +99,7 @@ const Guest = () => {
             }}
           />
 
-          <div className="container mx-auto mt-8 lg:grid lg:grid-cols-2">
+          <div className="container mx-auto mt-3 md:mt-5 lg:grid lg:grid-cols-2">
             <div className="">
               <h1 className="text-3xl font-bold mb-4">Hello, Guest</h1>
               <p className="text-lg text-gray-600 mb-4">
@@ -224,8 +224,8 @@ const Guest = () => {
                       className="underline text-green-700 font-semibold"
                     >
                       Login
-                    </Link>
-                    {' '} and get a more personalized experience.
+                    </Link>{' '}
+                    and get a more personalized experience.
                   </p>
                 </div>
               ) : (
