@@ -65,7 +65,8 @@ Installation
 1. **Clone the Repository:**
    
    ```
-   git clone https://github.com/mahfuzurrahman98/finance-health-calculator.git cd finance-health-calculator
+   git clone https://github.com/mahfuzurrahman98/finance-health-calculator.git
+   cd finance-health-calculator
    ```
 2. **Install Dependencies:**
    
