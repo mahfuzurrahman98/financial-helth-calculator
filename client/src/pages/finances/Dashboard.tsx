@@ -193,7 +193,7 @@ const Dashboard = () => {
                         : 'text-green-800'
                     }`}
                   >
-                    {dashboardData.current_score.toFixed(2)} (
+                    {dashboardData.current_score.toFixed(2)}% (
                     {categorizeHealthScore(dashboardData.current_score)})
                   </p>
                 </div>
@@ -216,7 +216,7 @@ const Dashboard = () => {
                         : 'text-green-800'
                     }`}
                   >
-                    {dashboardData.average_score.toFixed(2)} (
+                    {dashboardData.average_score.toFixed(2)}% (
                     {categorizeHealthScore(dashboardData.average_score)})
                   </p>
                 </div>
@@ -327,19 +327,19 @@ const Dashboard = () => {
                         Month
                       </th>
                       <th className="text-left border border-gray-400 p-2">
-                        Income
+                        Income($)
                       </th>
                       <th className="text-left border border-gray-400 p-2">
-                        Expense
+                        Expense($)
                       </th>
                       <th className="text-left border border-gray-400 p-2">
-                        Debts
+                        Debts($)
                       </th>
                       <th className="text-left border border-gray-400 p-2">
-                        Assets
+                        Assets($)
                       </th>
                       <th className="text-left border border-gray-400 p-2">
-                        Score
+                        Score(%)
                       </th>
                       <th className="text-left border border-gray-400 p-2">
                         Verdict
@@ -354,16 +354,16 @@ const Dashboard = () => {
                             {getMonthName(key)}
                           </td>
                           <td className="border border-gray-400 px-2 py-2">
-                            ${finance.income.toFixed(2)}
+                            {finance.income.toFixed(2)}
                           </td>
                           <td className="border border-gray-400 px-2 py-2">
-                            ${finance.expense.toFixed(2)}
+                            {finance.expense.toFixed(2)}
                           </td>
                           <td className="border border-gray-400 px-2 py-2">
-                            ${finance.debts.toFixed(2)}
+                            {finance.debts.toFixed(2)}
                           </td>
                           <td className="border border-gray-400 px-2 py-2">
-                            ${finance.assets.toFixed(2)}
+                            {finance.assets.toFixed(2)}
                           </td>
                           <td className="border border-gray-400 px-2 py-2">
                             {finance.score?.toFixed(2)}
@@ -411,7 +411,8 @@ const Dashboard = () => {
 
             <div className="mt-8">
               <p className="text-xl">
-                You have not calculated any finance yet. Click the button below to calculate your current finance health.
+                You have not calculated any finance yet. Click the button below
+                to calculate your current finance health.
               </p>
               <div className="mt-4">
                 <Link
