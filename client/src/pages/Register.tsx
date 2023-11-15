@@ -40,9 +40,20 @@ const Register = () => {
       const data = await response.data;
       setLoading(false);
       toast.success(data.detail);
-    } catch (err: any) {
+    } catch (error: any) {
       setLoading(false);
-      setError(err.response.data.detail);
+      
+      if (error.response.status == 422) {
+        if (typeof error.response.data.detail === 'string') {
+          setError(error.response.data.detail);
+        } else {
+          // if the detail is an object, then we need to get the first key-value pair
+          const key = Object.keys(error.response.data.detail)[0];
+          setError(error.response.data.detail[key]);
+        }
+      } else {
+        setError(error.response.data.detail);
+      }
     }
   };
 
