@@ -251,7 +251,7 @@ const Dashboard = () => {
 
                 {/* Tile 6: Total debts */}
                 <div className="bg-green-50 p-6 rounded-md shadow-md">
-                  <h2 className="text-xl font-semibold mb-4">Total Debts</h2>
+                  <h2 className="text-xl font-semibold mb-4">Your Debts</h2>
                   <p className="text-2xl text-green-800">
                     ${dashboardData.last_debts.toFixed(2)}
                   </p>
