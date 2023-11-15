@@ -167,7 +167,7 @@ const Dashboard = () => {
       status={status}
       component={
         <RootLayout>
-          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+          <h1 className="text-3xl font-bold mt-2 md:mt-4">Dashboard</h1>
           <h2 className="text-2xl font-semibold">
             Welcome, {userData.company}
           </h2>
