@@ -17,22 +17,23 @@ Tech Stack
 
 * **Frontend:**
 
-  * ReactJS
-  * React Google Chart for data visualization
-  * React Router for navigation
-  * Tailwind CSS for styling
+  * `ReactJS`
+  * `React Google Chart` for data visualization
+  * `React Router` for navigation
+  * `Tailwind CSS` for styling
 * **Backend:**
 
-  * Python FastAPI for the server
-  * PostgreSQL for the database
-  * SqlAlchemy as the ORM
+  * `Python FastAPI` for the server
+  * `PostgreSQL` for the database
+  * `SqlAlchemy` as the ORM
 * **Authentication:**
 
-  * JWT (JSON Web Tokens) for user authentication
+  * `JWT (JSON Web Tokens)` for user authentication
+  * `Refresh Token` for persistent login
 * **Deployment:**
 
-  * Vercel for both the frontend and the backend
-  * PostgreSQL hosted on Vercel for the database
+  * `Vercel` for both the frontend and the backend
+  * PostgreSQL hosted on `Vercel-Storage` for the database
 
 Features
 --------
@@ -62,33 +63,40 @@ Installation
 ------------
 
 1. **Clone the Repository:**
-
-   `git clone https://github.com/mahfuzurrahman98/finance-health-calculator.git cd finance-health-calculator`
+   
+   ```
+   git clone https://github.com/mahfuzurrahman98/finance-health-calculator.git cd finance-health-calculator
+   ```
 2. **Install Dependencies:**
-
+   
    Install frontend dependencies
-
-   `cd client`
-   `npm install`
-
+   ```
+   cd client   
+   npm install
+   ```
+   
    Install backend dependencies
-
-   `cd server`
-   `pip install -r requirements.txt`
+   ```
+   cd server
+   pip install -r requirements.txt
+   ```
 3. **Set Up Database:**
-
+   
    * Create a PostgreSQL database and configure the connection in the `server/.env` file.
+     
 4. **Run the Application:**
-
-   Run the backend server by entering the below commads:
-
-   `cd server`
-   `uvicorn main:app --reload`
-
-   Run the frontend server by entering the below commads:
-
-   `cd client`
-   `npm run dev`
+   
+   Run the backend server by entering the below commands:
+   ```
+   cd server
+   uvicorn main:app --reload
+   ```
+   
+   Run the frontend server by entering the below commands:
+   ```
+   cd client
+   npm run dev
+   ```
 
 Usage
 -----
