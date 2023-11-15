@@ -28,17 +28,3 @@ def finance_health_calculator(
     )
 
     return financial_health_score
-
-def categorize_financial_health_score(score):
-    if 80 <= score <= 100:
-        return "Excellent"
-    elif 60 <= score < 80:
-        return "Good"
-    elif 40 <= score < 60:
-        return "Stable"
-    elif 20 <= score < 40:
-        return "Challenged"
-    elif 0 <= score < 20:
-        return "Critical"
-    else:
-        return "Invalid Score"
