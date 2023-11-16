@@ -123,10 +123,6 @@ const Dashboard = () => {
         setLineChartData(_lineChartData);
         setScatterChartData(_scatterChartData);
       }
-      setStatus({
-        loading: false,
-        error: null,
-      });
     } catch (error) {}
   };
 
